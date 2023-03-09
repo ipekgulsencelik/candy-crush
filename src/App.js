@@ -9,6 +9,8 @@ import redCandy from "./images/red-candy.png";
 import yellowCandy from "./images/yellow-candy.png";
 import blank from "./images/blank.png";
 
+import ScoreBoard from "./components/ScoreBoard";
+
 const width = 8;
 const candyColors = [
   blueCandy,
@@ -23,6 +25,7 @@ function App() {
   const [currentColorArrangement, setCurrentColorArrangement] = useState([]);
   const [squareBeingDragged, setSquareBeingDragged] = useState(null);
   const [squareBeingReplaced, setSquareBeingReplaced] = useState(null);
+  const [scoreDisplay, setScoreDisplay] = useState(0);
 
   const checkForColumnOfFour = () => {
     for (let i = 0; i <= 39; i++) {
@@ -36,6 +39,7 @@ function App() {
             currentColorArrangement[square] === decidedColor && !isBlank
         )
       ) {
+        setScoreDisplay((score) => score + 4);
         columnOfFour.forEach(
           (square) => (currentColorArrangement[square] = blank)
         );
@@ -62,6 +66,7 @@ function App() {
             currentColorArrangement[square] === decidedColor && !isBlank
         )
       ) {
+        setScoreDisplay((score) => score + 4);
         rowOfFour.forEach(
           (square) => (currentColorArrangement[square] = blank)
         );
@@ -82,6 +87,7 @@ function App() {
             currentColorArrangement[square] === decidedColor && !isBlank
         )
       ) {
+        setScoreDisplay((score) => score + 3);
         columnOfThree.forEach(
           (square) => (currentColorArrangement[square] = blank)
         );
@@ -107,6 +113,7 @@ function App() {
             currentColorArrangement[square] === decidedColor && !isBlank
         )
       ) {
+        setScoreDisplay((score) => score + 3);
         rowOfThree.forEach(
           (square) => (currentColorArrangement[square] = blank)
         );
@@ -235,6 +242,7 @@ function App() {
           />
         ))}
       </div>
+      <ScoreBoard score={scoreDisplay} />
     </div>
   );
 }
