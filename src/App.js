@@ -26,7 +26,16 @@ function App() {
   useEffect(() => {
     createBoard();
   }, []);
-  return <div></div>;
+
+  return (
+    <div className="app">
+      <div className="game">
+        {currentColorArrangement.map((candyColor, index) => (
+          <img key={index} src={candyColor} alt={candyColor} />
+        ))}
+      </div>
+    </div>
+  );
 }
 
 export default App;
